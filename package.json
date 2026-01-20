@@ -3,7 +3,8 @@
   "version":"1.0.0",
   "private":true,
   "scripts":{
-    "watch:css":"tailwindcss -i ./src/style.css -o ./static/dist/style.css --watch"
+    "dev":"npx tailwindcss -i ./static/src/style.css -o ./static/dist/style.css --watch",
+    "watch:css":"npx tailwindcss -i ./static/src/style.css -o ./static/dist/style.css --minify"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.23",

@@ -8,10 +8,11 @@ module.exports = {
   theme: {
     extend: {
         colors: {
-        jungle: "#1f7a63",
-        jungleDark: "#155e4a",
+        jungle:'#0B5D1E',
+        jungleDark: '#084516',
         jungleLight: "#2ea88a",
         brandYellow: "#facc15",
+        yellow: '#FACC15',
       },
     },
   },

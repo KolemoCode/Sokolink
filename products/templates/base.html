@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="sokolink,business networking platform,professional connections,digital market place">
+    <meta name="description" content="sokolink is an online platform that connects businesses people and makes discovery easy for people">
+    <title>{% block title %}Base template{% endblock title %}</title>
+    <link href="{% static 'dist/style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="bg-jungle border-b-4 border-yellow">
+            <div class="max-w-7xl mx-auto px-4 py-3">
+
+                <!-- TOP ROW -->
+                <div class="flex items-center justify-between">
+
+                <!-- LEFT: Logo + Name -->
+                <div class="flex items-center space-x-2">
+                    <a href="{% url 'products' %}" class="flex items-center space-x-2">
+                    <img src="{% static 'images/logo.png' %}"
+                        class="h-10 w-10 rounded-full border-2 border-yellow"
+                        alt="SokoLink Logo" height=25 width=25>
+                    <span class="text-yellow font-bold text-xl">SokoLink</span>
+                    </a>
+                </div>
+
+                <!-- CENTER: Search -->
+                <div class=" md:block flex-1 mx-8">
+                    <form method="get"  class="relative max-w-md mx-auto">
+                    <input
+                        type="text"
+                        name="q"
+                        placeholder="Search products, services, jobs..."
+                        class="w-full px-4 py-2 rounded-full border-2 border-yellow focus:outline-none">
+                    <button type="submit" class="absolute right-3 top-2 text-jungle">
+                        🔍
+                    </button>
+                    </form>
+                </div>
+
+                <!-- RIGHT: User Badge + Menu Button -->
+                <div class="flex items-center space-x-4">
+
+                    {% if user.is_authenticated %}
+                    <div class="h-10 w-10 rounded-full bg-yellow flex items-center justify-center font-bold text-white">
+                        {{ user.username|first|upper }}
+                    </div>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="text-white hover:text-yellow">Login</a>
+                    {% endif %}
+
+                    <!-- Menu Button -->
+                    <button id="menu-btn" class="text-white text-2xl md:hidden">
+                    ☰
+                    </button>
+                </div>
+
+                </div>
+
+                <!-- SECOND ROW -->
+                <div id="nav-links" class="mt-4 flex items-center justify-between text-white">
+
+                <!-- LINKS -->
+                <div class="flex space-x-6">
+                    <a href="{% url 'products' %}" class="hover:text-yellow">Products</a>
+                    <a href="{% url 'services' %}" class="hover:text-yellow">Services</a>
+                    <a href="{% url 'jobs' %}" class="hover:text-yellow">Jobs</a>
+
+                </div>
+
+                <!-- INBOX -->
+                <a href="{% url 'messages' %}" class="flex items-center space-x-2 hover:text-yellow">
+                    <span>📩</span>
+                    <span>Inbox</span>
+                </a>
+
+                </div>
+
+            </div>
+
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+
+        {% endblock content %}
+    </main>
+
+</body>
+</html>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
