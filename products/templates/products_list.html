@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'dist/style.css' %}">
+    {% block content %}
+    <h1 class="text-3xl font-bold text-jungle-600">
+        This is the Products Listing section
+    </h1>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {% for product in products %}
+        <div class="border-b-4 border-yellow ">
+            <a href="{% url 'product_detail' product.pk %}"  class="bg-white p-4 rounded-xl shadow">
+                <img src="{{ product.product_img.url }}" alt="{{ product.product_name }}" class="object-cover  rounded-lg" height="full" width=100>
+                <h2 class="mt-2 text-lg font-semibold">{{ product.product_name }}</h2>
+                <p class="text-yellow-500 font-bold">KSh {{ product.price }}</p>
+                <p class="text-sm text-gray-500">{{ product.user.profile.location }}</p>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock content %}
