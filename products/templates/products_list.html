@@ -2,17 +2,21 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'dist/style.css' %}">
     {% block content %}
-    <h1 class="text-3xl font-bold text-jungle-600">
-        This is the Products Listing section
-    </h1>
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {% for product in products %}
-        <div class="border-b-4 border-yellow ">
-            <a href="{% url 'product_detail' product.pk %}"  class="bg-white p-4 rounded-xl shadow">
-                <img src="{{ product.product_img.url }}" alt="{{ product.product_name }}" class="object-cover  rounded-lg" height="full" width=100>
-                <h2 class="mt-2 text-lg font-semibold">{{ product.product_name }}</h2>
-                <p class="text-yellow-500 font-bold">KSh {{ product.price }}</p>
-                <p class="text-sm text-gray-500">{{ product.user.profile.location }}</p>
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden border-b-4 border-yellow ">
+            <a href="{% url 'product_detail' product.pk %}"  class="relative group p-4 ">
+                <img src="{{ product.product_img.url }}" alt="{{ product.product_name }}" class="w=half h=11 object-cover rounded-lg " height=11 width="half">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition"></div>
+                <span class="absolute top-2 right-2 text-xs bg-yellow-400 text-white font-semibold px-2 py-1 rounded-md shadow">
+                    {{ product.time_posted|timesince }} ago
+                </span>
+                <div class="p-3 space-y-1s">
+                    <h3 class="mt-2 text-sm font-semibold truncate">{{ product.product_name }}</h3>
+                    <p class="text-jungle font-bold">KSh {{ product.price }}</p>
+                    <p class="text-xs text-gray-500">{{ product.user.profile.location }}</p>
+
+                </div>
             </a>
         </div>
         {% endfor %}

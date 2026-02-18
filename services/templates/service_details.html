@@ -1,0 +1,104 @@
+<h3>This is the service_detail</h3>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="sokolink,business networking platform,professional connections,digital market place">
+    <meta name="description" content="sokolink is an online platform that connects businesses people and makes discovery easy for people">
+    <title>{{ service.title }} | SokoLink</title>
+    <link rel="stylesheet" href="{% static 'dist/style.css' %}">
+</head>
+
+<body class="bg-gray-50">
+
+<div class="max-w-4xl mx-auto p-4">
+
+    <!-- ===== TOP INFO ===== -->
+    <div class="bg-white rounded-2xl shadow-md p-5 flex items-center gap-4 border-b-4 border-yellow">
+
+        <img src="{{ service.user.profile.profile_pic.url }}" alt="{{ product.name }}" class="w-100 h-25 rounded-full object-cover" height=25 width=100>
+
+        <div>
+            <h2 class="font-bold text-lg">
+                {{ service.user.username }}
+            </h2>
+
+            <p class="text-primary font-semibold">
+                 {{ service.service }}
+            </p>
+
+            <p class="text-sm text-gray-500">
+                📍{{ service.user.profile.location }}
+            </p>
+        </div>
+    </div>
+    <!-- ===== IMAGE SLIDER ===== -->
+    <div class="mt-6 relative">
+
+        <div id="slider" class="overflow-hidden rounded-2xl shadow">
+
+            <div id="slides" class="flex bg-black transition-transform duration-500">
+
+                {% for image in service.images.all %}
+                <img src="{{ image.image.url }}" alt="{{ product.name }}" class="w-full flex-shrink-0 object-cover h-72"  height=10 width="full">
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <!-- buttons -->
+        <button onclick="prevSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow">◀</button>
+        <button onclick="nextSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow">▶</button>
+
+    </div>
+    <!-- ===== ACTION BUTTONS ===== -->
+    <div class="mt-6 space-y-8">
+        <div class="bg-jungle rounded-2xl shadow-md p-5 flex items-center gap-4 border-b-4 border-primary">
+            <a href="{% url 'messages' %}"
+            class="block w-full text-center bg-primary text-white font-semibold py-3 rounded-xl">
+                💬 Chat with Seller
+            </a>
+        </div>
+
+        <div class="bg-jungle rounded-2xl shadow-md p-5 flex items-center gap-4 border-b-4 border-primary">
+            <a href="mailto:{{ service.user.email }}"
+            class="block w-full text-center bg-gray-800 text-white py-3 rounded-xl">
+                📧 Email Seller
+            </a>
+        </div>
+
+        <div class="bg-jungle rounded-2xl shadow-md p-5 flex items-center gap-4 border-b-4 border-primary">
+            <a href="tel:{{ service.user.profile.phone_number }}"
+            class="block w-full text-center bg-green-600 text-white py-3 rounded-xl">
+                📞 Call Seller
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ===== SLIDER JS ===== -->
+<script>
+let index = 0;
+const slides = document.getElementById("slides");
+
+function showSlide() {
+    slides.style.transform = `translateX(-${index * 100}%)`;
+}
+
+function nextSlide() {
+    if (index < slides.children.length - 1) index++;
+    showSlide();
+}
+
+function prevSlide() {
+    if (index > 0) index--;
+    showSlide();
+}
+</script>
+
+</body>
+</html>
