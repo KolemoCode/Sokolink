@@ -1,0 +1,62 @@
+
+
+{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="sokolink,business networking platform,professional connections,digital market place">
+    <meta name="description" content="sokolink is an online platform that connects businesses people and makes discovery easy for people">
+    <title>jobs</title>
+    <link rel="stylesheet" href="{% static 'dist/style.css' %}">
+</head>
+<body class="bg-gray-50">
+    {% block content %}
+<div class="max-w-7xl mx-auto px-3 py-3">
+
+    <h1 class="text-2xl font-bold mb-3">Available Jobs</h1>
+    <div class="space-y-4">
+
+        {% for job in jobs %}
+        <a href="{% url 'job_details' job.id %}">
+            <div class="w-full bg-white shadow-md rounded-2xl p-4 flex flex-col md:flex-row gap-4 border border-yellow">
+                <!-- LEFT SECTION (1/4) -->
+                <div class="md:w-1/4 w-full flex items-center gap-4">
+
+                    <!-- Profile Image -->
+                    <img src="{{ job.user.profile.profile_pic.url }}" 
+                        alt="Profile"
+                        class="w-90 h-16 rounded-full object-cover border"height=16 width=90>
+
+                    <!-- User Info -->
+                    <div>
+                        <h2 class="text-lg font-semibold text-gray-800">
+                            {{ job.user.username }}
+                        </h2>
+                        <p class="text-sm text-gray-500">
+                            📍 {{ job.user.profile.location }}
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT SECTION (3/4) -->
+                <div class="md:w-3/4 w-full flex flex-col md:flex-row justify-between items-center gap-4">
+
+                    <!-- First Div -->
+                    <div class=" bg-gray-50 p-3 rounded-xl text-center">
+                        <p class="text-white font-medium bg-jungle"><u>Job title:</u></p>
+                        {{ job.job_title }}
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+
+    </div>
+</div>
+    {% endblock content %}    
+</body>
+</html>

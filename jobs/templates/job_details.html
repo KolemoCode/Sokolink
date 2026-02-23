@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="sokolink,business networking platform,professional connections,digital market place">
+    <meta name="description" content="sokolink is an online platform that connects businesses people and makes discovery easy for people">
+    <title>{{ job.title }} | SokoLink</title>
+    <link rel="stylesheet" href="{% static 'dist/style.css' %}">
+</head>
+
+<body class="bg-gray-50">
+
+<div class="max-w-4xl mx-auto p-8 justify-center">
+
+    <!-- ===== TOP INFO ===== -->
+    <div class="bg-white rounded-2xl shadow-md p-5 flex items-center gap-4 border-b-4 border-yellow">
+
+        <img src="{{ job.user.profile.profile_pic.url }}" alt="{{ product.name }}" class="w-100 h-25 rounded-full object-cover" height=25 width=100>
+
+        <div>
+            <h2 class="font-bold text-lg">
+                {{ job.user.username }}
+            </h2>
+            <p class="text-sm text-gray-500">
+                📍{{ job.user.profile.location }}
+            </p>
+        </div>
+    </div>
+    <div>
+        <p class="text-primary font-semibold">
+            <u>Job title:</u>
+                {{ job.job_title }}
+        </p>
+        <p class="text-primary font-semibold">
+            <u>Qualifications:</u>
+                {{ job.qualifications }}
+        </p>
+        <p class="text-primary font-semibold">
+            <u>Description:</u>
+                {{ job.job_description }}
+        </p>
+    </div>
+
+    <!-- ===== ACTION BUTTONS ===== -->
+    <div class="mt-6 max-w-7xl space-y-8">
+        <div class="bg-jungle rounded-2xl shadow-md p-5 flex items-center gap-4 border-b-4 border-primary">
+            <a href="{% url 'messages' %}"
+            class="block w-full text-center bg-primary text-white font-semibold py-3 rounded-xl">
+                💬 message employer
+            </a>
+        </div>
+
+        <div class="bg-jungle rounded-2xl shadow-md p-5 flex items-center gap-4 border-b-4 border-primary">
+            <a href="mailto:{{ service.user.email }}"
+            class="block w-full text-center bg-gray-800 text-white py-3 rounded-xl">
+                📧 Email employer
+            </a>
+        </div>
+
+        <div class="bg-jungle rounded-2xl shadow-md p-5 flex items-center gap-4 border-b-4 border-primary">
+            <a href="tel:{{ service.user.profile.phone_number }}"
+            class="block w-full text-center bg-green-600 text-white py-3 rounded-xl">
+                📞 Call employer
+            </a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

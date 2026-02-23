@@ -1,1 +1,59 @@
-<h1>This is the Jobs section Listing</h1>
+{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="sokolink,business networking platform,professional connections,digital market place">
+    <meta name="description" content="sokolink is an online platform that connects businesses people and makes discovery easy for people">
+    <title>jobs</title>
+    <link rel="stylesheet" href="{% static 'dist/style.css' %}">
+</head>
+<body class="bg-gray-50">
+    {% block content %}
+<div class="max-w-7xl mx-auto px-3 py-8">
+
+    <h1 class="text-2xl font-bold mb-3">Available Jobs</h1>
+    <div class="space-y-4">
+
+        {% for job in jobs %}
+        <a href="{% url 'job_details' job.id %}"
+            class="flex w-full py-8 border border-yellow rounded-xl p-2 shadow-sm hover:shadow-md hover:bg-gray-50 transition">
+
+            <!-- Content -->
+            <div class="flex px-0  bg-jungle">   
+                <!-- Image -->
+                <div class="mb-3">
+                    <img src="{{ job.user.profile.profile_pic.url }}"
+                        class="w-90 h-11 object-cover rounded-full flex-shrink-0"
+                        alt="profile" height=15 width=90>
+                </div>
+                        <!-- Username -->
+                <h3 class="font-semibold text-white truncate">
+                    {{ job.user.username }}
+                </h3>
+
+                <!-- Location -->
+                <p class="text-xs text-white">
+                    📍 {{ job.user.profile.location }}
+                </p>
+
+            </div>
+            <div class="ml-auto w-3/4 bg-yellow">
+                <main >
+                    <!-- Service name -->
+                    <p class="font-bold text-sm text-gray-600 truncate">
+                        <u>Job title:</u>{{ job.job_title }}
+                    </p>
+                </main>
+            </div>
+        </a>
+        {% endfor %}
+
+    </div>
+</div>
+    {% endblock content %}
+    
+</body>
+</html>
